@@ -47,7 +47,8 @@ const { writeFile } = require("fs");
             });
 
             const cheapestPrice = Math.min(...carPrices);
-            if (cheapestPrice < 45000) {
+            if (cheapestPrice < 48000) {
+                console.log("Sending Email")
                 const mailOptions = {
                     from: process.env.SENDER_EMAIL,
                     to: process.env.RECIPIENT_EMAIL,
@@ -55,13 +56,20 @@ const { writeFile } = require("fs");
                     text: `The cheapest Tesla car on the website is now priced at $${cheapestPrice}.`
                 };
 
-                await transporter.sendMail(mailOptions, function (error) {
+                await transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
                         console.log(error);
                     } else {
-                        console.log('Email sent!\n');
+                        console.log('Email sent: ' + info.response);
                     }
                 });
+                // await transporter.sendMail(mailOptions, function (error) {
+                //     if (error) {
+                //         console.log(error);
+                //     } else {
+                //         console.log('Email sent!\n');
+                //     }
+                // });
             }
 
             console.log("Page Loaded!");
@@ -106,8 +114,8 @@ const { writeFile } = require("fs");
     const dailyReportTime = new Date();
     dailyReportTime.setHours(0, 0, 0, 0);
 
-    // setInterval(sendDailyReport, 24 * 60 * 60 * 1000); // Run daily report every 24 hours
-    setInterval(sendDailyReport, 6 * 60 * 60 * 1000);
+    setInterval(sendDailyReport, 24 * 60 * 60 * 1000); // Run daily report every 24 hours
+    // setInterval(sendDailyReport, 6 * 60 * 60 * 1000);
 
     await browser.close();
 })();
