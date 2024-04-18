@@ -47,7 +47,7 @@ const { writeFile } = require("fs");
             });
 
             const cheapestPrice = Math.min(...carPrices);
-            if (cheapestPrice < 48000) {
+            if (cheapestPrice < 50000) {
                 console.log("Sending Email")
                 const mailOptions = {
                     from: process.env.SENDER_EMAIL,
