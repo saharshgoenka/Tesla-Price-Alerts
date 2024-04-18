@@ -13,7 +13,7 @@ const { writeFile } = require("fs");
 (async () => {
     const currentDate = new Date().toISOString().split('T')[0].replace(/[^0-9]/g, '-');
     // const url = 'https://www.tesla.com/inventory/new/my?TRIM=LRAWD&arrangeby=plh&zip=94539&range=100';
-    const url = 'https://www.tesla.com/inventory/new/my?TRIM=LRAWD&arrangeby=plh&zip=85281&range=100';
+    const url = 'https://www.tesla.com/inventory/new/my?TRIM=LRAWD&arrangeby=plh&zip=94538&range=100';
     const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
 
     let errorCount = 0;
