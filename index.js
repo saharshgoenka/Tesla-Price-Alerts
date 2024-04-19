@@ -53,7 +53,9 @@ const { writeFile } = require("fs");
                     from: process.env.SENDER_EMAIL,
                     to: process.env.RECIPIENT_EMAIL,
                     subject: `Cheapest Tesla Car Price Alert: $${cheapestPrice}`,
-                    text: `The cheapest Tesla car on the website is now priced at $${cheapestPrice}.`
+                    text: `The cheapest Tesla car on the website is now priced at $${cheapestPrice}.\n
+                    
+                    `
                 };
 
                 await transporter.sendMail(mailOptions, (error, info) => {
@@ -109,11 +111,12 @@ const { writeFile } = require("fs");
     }
 
     await checkCheapestCar();
+    setInterval(checkCheapestCar, 30 * 60 * 1000);
 
     // Run the weekly report task every Sunday at 12:00 AM
-    const dailyReportTime = new Date();
-    dailyReportTime.setHours(0, 0, 0, 0);
-
+    // const dailyReportTime = new Date();
+    // dailyReportTime.setHours(0, 0, 0, 0);
+    await sendDailyReport();
     setInterval(sendDailyReport, 24 * 60 * 60 * 1000); // Run daily report every 24 hours
     // setInterval(sendDailyReport, 6 * 60 * 60 * 1000);
 
